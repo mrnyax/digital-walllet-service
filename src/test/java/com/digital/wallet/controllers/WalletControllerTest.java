@@ -12,7 +12,9 @@ import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @WebMvcTest(WalletController.class)
 class WalletControllerTest {
@@ -28,7 +30,7 @@ class WalletControllerTest {
     void createWallet_returnsStatusCreated() throws Exception {
         final UUID userId = UUID.randomUUID();
         final String walletName = "Test Wallet";
-        final WalletDto walletDto = new WalletDto(walletName, userId);
+        final WalletDto walletDto = new WalletDto(userId, walletName);
         mockMvc.perform(
                         post(WALLET_ENDPOINT)
                                 .contentType(MediaType.APPLICATION_JSON)
