@@ -51,9 +51,7 @@ class WalletControllerTest {
     }
 
     @Test
-    void createWallet_whenInvalidRequestBody_returnsBadRequest() throws Exception {
-        when(walletService.createWallet(any())).thenReturn(new CreateWalletResponse(null));
-
+    void createWallet_whenNameAndUserIdIsNull_returnsBadRequest() throws Exception {
         final CreateWalletRequest createWalletRequest = new CreateWalletRequest(null, null);
         mockMvc.perform(
                         post(WALLET_ENDPOINT)
@@ -66,6 +64,28 @@ class WalletControllerTest {
                 .andExpect(jsonPath("$.errors").exists())
                 .andExpect(jsonPath("$.statusCode").exists())
         ;
+    }
+
+    @Test
+    void createWallet_whenInvalidUserId_returnsBadRequest() throws Exception {
+
+        final String requestWithInvalidUserId = """
+                {
+                  "userId" : "123",
+                  "name" : "test user"
+                }
+                """;
+
+        mockMvc.perform(
+                        post(WALLET_ENDPOINT)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(requestWithInvalidUserId)
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.errors").exists())
+                .andExpect(jsonPath("$.statusCode").exists());
     }
 
 }
