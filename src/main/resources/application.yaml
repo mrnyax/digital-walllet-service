@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: digital-wallet
+server:
+  port: 7400
