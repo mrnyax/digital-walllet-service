@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record WalletDto(
+public record CreateWalletRequest(
         @NotNull(message = "User ID is required")
         UUID userId,
         @NotBlank(message = "Name is required.")
