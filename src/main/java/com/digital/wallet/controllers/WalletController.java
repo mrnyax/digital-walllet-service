@@ -4,6 +4,7 @@ import com.digital.wallet.dtos.request.CreateWalletRequest;
 import com.digital.wallet.dtos.response.CreateWalletResponse;
 import com.digital.wallet.services.WalletService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ public class WalletController {
     public ResponseEntity<?> create(@RequestBody @Valid CreateWalletRequest createWalletRequest) {
         final CreateWalletResponse response = walletService.createWallet(createWalletRequest);
         return ResponseEntity
-                .created(URI.create("/api/v1/wallet"))
+                .status(HttpStatus.CREATED)
                 .body(response);
     }
 }
