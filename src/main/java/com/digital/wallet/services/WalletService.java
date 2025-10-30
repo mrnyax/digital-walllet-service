@@ -4,7 +4,7 @@ import com.digital.wallet.dtos.request.CreateWalletRequest;
 import com.digital.wallet.dtos.response.CreateWalletResponse;
 import com.digital.wallet.repositories.WalletRepository;
 import com.digital.wallet.repositories.entities.Wallet;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
