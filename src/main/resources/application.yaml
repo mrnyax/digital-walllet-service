@@ -1,5 +1,12 @@
 spring:
   application:
     name: digital-wallet
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/digital_wallet
+    username: local-user
+    password: Pass@1234
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
 server:
   port: 7400
